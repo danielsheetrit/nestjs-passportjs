@@ -13,6 +13,8 @@ exports.AuthService = void 0;
 const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
 const bcrypt = require("bcrypt");
+const ErrorWithMessage_1 = require("../utils/errors/ErrorWithMessage");
+const common_2 = require("@nestjs/common");
 const users_service_1 = require("../users/users.service");
 const config_keys_1 = require("../utils/config/config-keys");
 let AuthService = class AuthService {
@@ -21,7 +23,7 @@ let AuthService = class AuthService {
         this.configService = configService;
     }
     async signupNewUser(username, password) {
-        const hashSecret = this.configService.get(config_keys_1.configKeys.hashSecret);
+        const hashSecret = this.configService.get(config_keys_1.configKeys.saltRound);
         const hashedPassword = await bcrypt.hash(password, hashSecret);
         const user = await this.usersService.insertUser(username, hashedPassword);
         if (user) {
@@ -29,10 +31,23 @@ let AuthService = class AuthService {
             return rest;
         }
     }
+    async validateUser(username, password) {
+        const user = await this.usersService.getUser(username);
+        const passwordValid = await bcrypt.compare(password, user.password);
+        if (!user || !passwordValid) {
+            throw new common_2.HttpException("Password or Username are Invalid", common_2.HttpStatus.BAD_REQUEST);
+        }
+        return {
+            userId: user.id,
+            userName: user.username,
+        };
+    }
 };
 exports.AuthService = AuthService;
 exports.AuthService = AuthService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [users_service_1.UsersService, config_1.ConfigService])
+    (0, common_1.UseFilters)(ErrorWithMessage_1.ErrorWithMessage),
+    __metadata("design:paramtypes", [users_service_1.UsersService,
+        config_1.ConfigService])
 ], AuthService);
 //# sourceMappingURL=auth.service.js.map

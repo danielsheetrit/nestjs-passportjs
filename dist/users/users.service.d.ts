@@ -30,4 +30,7 @@ export declare class UsersService {
     insertUser(userName: string, password: string): Promise<import("mongoose").Document<unknown, {}, User> & User & Required<{
         _id: string;
     }>>;
+    getUser(userName: string): Promise<import("mongoose").Document<unknown, {}, User> & User & Required<{
+        _id: string;
+    }>>;
 }

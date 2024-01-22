@@ -5,4 +5,5 @@ export declare class AuthService {
     private configService;
     constructor(usersService: UsersService, configService: ConfigService);
     signupNewUser(username: string, password: string): Promise<any>;
+    validateUser(username: string, password: string): Promise<any>;
 }

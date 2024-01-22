@@ -29,6 +29,14 @@ let UsersService = class UsersService {
         await newUser.save();
         return newUser;
     }
+    async getUser(userName) {
+        const username = userName.toLowerCase();
+        const user = await this.userModel.findOne({ username });
+        if (!user) {
+            throw new common_1.HttpException('User not found', common_1.HttpStatus.BAD_REQUEST);
+        }
+        return user;
+    }
 };
 exports.UsersService = UsersService;
 exports.UsersService = UsersService = __decorate([

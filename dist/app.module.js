@@ -9,21 +9,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const app_controller_1 = require("./app.controller");
-const auth_module_1 = require("./auth/auth.module");
-const users_module_1 = require("./users/users.module");
 const initiate_mongo_1 = require("./utils/config/initiate-mongo");
 const initiate_env_1 = require("./utils/config/initiate-env");
+const auth_module_1 = require("./auth/auth.module");
+const users_module_1 = require("./users/users.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [
-            initiate_env_1.envModel,
-            initiate_mongo_1.mongoModel,
-            auth_module_1.AuthModule,
-            users_module_1.UsersModule,
-        ],
+        imports: [initiate_env_1.envModel, initiate_mongo_1.mongoModel, auth_module_1.AuthModule, users_module_1.UsersModule],
         controllers: [app_controller_1.AppController],
         providers: [],
     })
