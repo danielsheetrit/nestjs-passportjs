@@ -5,4 +5,5 @@ export declare const configKeys: {
     saltRound: string;
     dbName: string;
     sessionSecret: string;
+    sessionMaxAge: string;
 };

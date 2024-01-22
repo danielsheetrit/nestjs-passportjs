@@ -7,6 +7,7 @@ exports.configKeys = {
     port: "PORT",
     saltRound: "SALT_ROUND",
     dbName: "DB_NAME",
-    sessionSecret: "SESSION_SECRET"
+    sessionSecret: "SESSION_SECRET",
+    sessionMaxAge: "SESSION_MAX_AGE"
 };
 //# sourceMappingURL=config-keys.js.map

@@ -20,7 +20,7 @@ async function bootstrap() {
         resave: false,
         saveUninitialized: false,
         cookie: {
-            maxAge: 28800000
+            maxAge: configService.get(config_keys_1.configKeys.sessionMaxAge)
         }
     }));
     app.use(passport.initialize());

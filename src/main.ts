@@ -22,7 +22,7 @@ async function bootstrap() {
       resave: false,
       saveUninitialized: false,
       cookie: {
-        maxAge: 28800000 // 8 hours
+        maxAge: configService.get(configKeys.sessionMaxAge) // In Milliseconds
       }
     }),
   );
