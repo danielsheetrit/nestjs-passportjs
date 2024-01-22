@@ -14,7 +14,7 @@ const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
 const bcrypt = require("bcrypt");
 const users_service_1 = require("../users/users.service");
-const config_keys_1 = require("../utils/config/config.keys");
+const config_keys_1 = require("../utils/config/config-keys");
 let AuthService = class AuthService {
     constructor(usersService, configService) {
         this.usersService = usersService;

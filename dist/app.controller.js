@@ -24,6 +24,6 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], AppController.prototype, "getHello", null);
 exports.AppController = AppController = __decorate([
-    (0, common_1.Controller)('/app')
+    (0, common_1.Controller)()
 ], AppController);
 //# sourceMappingURL=app.controller.js.map

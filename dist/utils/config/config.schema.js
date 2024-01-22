@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.configValidationSchema = void 0;
 const Joi = require("joi");
-const config_keys_1 = require("./config.keys");
+const config_keys_1 = require("./config-keys");
 exports.configValidationSchema = Joi.object({
     [config_keys_1.configKeys.mongoUri]: Joi.string().required(),
     [config_keys_1.configKeys.port]: Joi.number().default(8000),

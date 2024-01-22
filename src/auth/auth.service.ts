@@ -1,9 +1,9 @@
-import { Injectable, HttpException, HttpStatus } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import * as bcrypt from 'bcrypt'
 
 import { UsersService } from "src/users/users.service";
-import { configKeys } from "src/utils/config/config.keys";
+import { configKeys } from "src/utils/config/config-keys";
 
 @Injectable()
 export class AuthService {

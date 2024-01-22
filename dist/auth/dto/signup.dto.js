@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SignupDTO = void 0;
 const class_validator_1 = require("class-validator");
+const password_validator_decorator_1 = require("../../utils/decorators/password-validator.decorator");
 class SignupDTO {
 }
 exports.SignupDTO = SignupDTO;
@@ -19,13 +20,7 @@ __decorate([
     __metadata("design:type", String)
 ], SignupDTO.prototype, "username", void 0);
 __decorate([
-    (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.MinLength)(8, {
-        message: "Password too short",
-    }),
-    (0, class_validator_1.MaxLength)(20, {
-        message: "Password too long",
-    }),
+    (0, password_validator_decorator_1.IsValidPassword)(),
     __metadata("design:type", String)
 ], SignupDTO.prototype, "password", void 0);
 //# sourceMappingURL=signup.dto.js.map

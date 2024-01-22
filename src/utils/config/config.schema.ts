@@ -1,5 +1,5 @@
 import * as Joi from "joi";
-import { configKeys } from "./config.keys";
+import { configKeys } from "./config-keys";
 
 export const configValidationSchema = Joi.object({
   [configKeys.mongoUri]: Joi.string().required(),

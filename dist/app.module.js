@@ -8,32 +8,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
-const mongoose_1 = require("@nestjs/mongoose");
 const app_controller_1 = require("./app.controller");
 const auth_module_1 = require("./auth/auth.module");
 const users_module_1 = require("./users/users.module");
-const config_1 = require("@nestjs/config");
-const config_schema_1 = require("./utils/config/config.schema");
-const config_keys_1 = require("./utils/config/config.keys");
+const initiate_mongo_1 = require("./utils/config/initiate-mongo");
+const initiate_env_1 = require("./utils/config/initiate-env");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            config_1.ConfigModule.forRoot({
-                envFilePath: '.env',
-                isGlobal: true,
-                validationSchema: config_schema_1.configValidationSchema,
-            }),
-            mongoose_1.MongooseModule.forRootAsync({
-                imports: [config_1.ConfigModule],
-                useFactory: async (configService) => ({
-                    uri: configService.get(config_keys_1.configKeys.mongoUri),
-                    dbName: configService.get(config_keys_1.configKeys.dbName)
-                }),
-                inject: [config_1.ConfigService],
-            }),
+            initiate_env_1.envModel,
+            initiate_mongo_1.mongoModel,
             auth_module_1.AuthModule,
             users_module_1.UsersModule,
         ],

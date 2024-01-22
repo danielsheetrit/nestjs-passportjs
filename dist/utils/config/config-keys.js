@@ -8,4 +8,4 @@ exports.configKeys = {
     hashSecret: "HASH_SECRET",
     dbName: "DB_NAME",
 };
-//# sourceMappingURL=config.keys.js.map
+//# sourceMappingURL=config-keys.js.map

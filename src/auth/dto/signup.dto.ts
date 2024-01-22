@@ -1,16 +1,11 @@
 // DTO = Data Transfer Objects
-import { IsNotEmpty, MaxLength, MinLength } from "class-validator";
+import { IsNotEmpty } from "class-validator";
+import { IsValidPassword } from "src/utils/decorators/password-validator.decorator";
 
 export class SignupDTO {
   @IsNotEmpty()
   username: string;
 
-  @IsNotEmpty()
-  @MinLength(8, {
-    message: "Password too short",
-  })
-  @MaxLength(20, {
-    message: "Password too long",
-  })
+ @IsValidPassword()
   password: string;
 }
