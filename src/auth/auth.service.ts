@@ -17,7 +17,7 @@ export class AuthService {
 
   async signupNewUser(username: string, password: string): Promise<any> {
     const hashSecret = this.configService.get<string>(configKeys.saltRound);
-    const hashedPassword = await bcrypt.hash(password, hashSecret);
+    const hashedPassword = await bcrypt.hash(password, parseInt(hashSecret));
 
     const user = await this.usersService.insertUser(username, hashedPassword);
 

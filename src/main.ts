@@ -22,14 +22,14 @@ async function bootstrap() {
       resave: false,
       saveUninitialized: false,
       cookie: {
-        maxAge: configService.get(configKeys.sessionMaxAge) // In Milliseconds
+        maxAge: parseInt(configService.get(configKeys.sessionMaxAge), 10)  // In Milliseconds
       }
     }),
   );
   app.use(passport.initialize());
   app.use(passport.session());
 
-  await app.listen(configService.get(configKeys.port));
+  await app.listen(parseInt(configService.get(configKeys.port), 10));
 }
 
 bootstrap();

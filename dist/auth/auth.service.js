@@ -24,7 +24,7 @@ let AuthService = class AuthService {
     }
     async signupNewUser(username, password) {
         const hashSecret = this.configService.get(config_keys_1.configKeys.saltRound);
-        const hashedPassword = await bcrypt.hash(password, hashSecret);
+        const hashedPassword = await bcrypt.hash(password, parseInt(hashSecret));
         const user = await this.usersService.insertUser(username, hashedPassword);
         if (user) {
             const { password, ...rest } = user;

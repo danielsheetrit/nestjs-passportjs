@@ -20,12 +20,12 @@ async function bootstrap() {
         resave: false,
         saveUninitialized: false,
         cookie: {
-            maxAge: configService.get(config_keys_1.configKeys.sessionMaxAge)
+            maxAge: parseInt(configService.get(config_keys_1.configKeys.sessionMaxAge), 10)
         }
     }));
     app.use(passport.initialize());
     app.use(passport.session());
-    await app.listen(configService.get(config_keys_1.configKeys.port));
+    await app.listen(parseInt(configService.get(config_keys_1.configKeys.port), 10));
 }
 bootstrap();
 //# sourceMappingURL=main.js.map
