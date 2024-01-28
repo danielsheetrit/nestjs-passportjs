@@ -15,7 +15,10 @@ export class DTOValidationFilter implements ExceptionFilter {
     const response = ctx.getResponse<Response>();
     const request = ctx.getRequest<Request>();
 
-    Logger.error(`dto-validation-error at: ${request.url}`);
+    Logger.error(`
+      dto-validation-error at: ${request.url},
+      ${JSON.stringify(exception.errors).toString()}
+    `);
 
     response.status(HttpStatus.BAD_REQUEST).json({
       statusCode: HttpStatus.BAD_REQUEST,

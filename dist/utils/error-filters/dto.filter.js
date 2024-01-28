@@ -15,7 +15,10 @@ let DTOValidationFilter = class DTOValidationFilter {
         const ctx = host.switchToHttp();
         const response = ctx.getResponse();
         const request = ctx.getRequest();
-        common_2.Logger.error(`dto-validation-error at: ${request.url}`);
+        common_2.Logger.error(`
+      dto-validation-error at: ${request.url},
+      ${JSON.stringify(exception.errors).toString()}
+    `);
         response.status(common_1.HttpStatus.BAD_REQUEST).json({
             statusCode: common_1.HttpStatus.BAD_REQUEST,
             timestamp: new Date().toISOString(),
