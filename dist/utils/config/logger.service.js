@@ -84,7 +84,6 @@ let CustomLogger = class CustomLogger {
         this.writeToConsole(message, "info");
     }
     debug(message) {
-        this.writeToCloudwatch(message, "debug");
         this.writeToConsole("👾" + message, "debug");
     }
 };

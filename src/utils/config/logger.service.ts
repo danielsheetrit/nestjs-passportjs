@@ -93,7 +93,6 @@ export class CustomLogger implements LoggerService {
   }
 
   debug(message: string) {
-    this.writeToCloudwatch(message, "debug");
     this.writeToConsole("👾" + message, "debug");
   }
 }
