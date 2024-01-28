@@ -93,6 +93,6 @@ export class CustomLogger implements LoggerService {
   }
 
   debug(message: string) {
-    this.writeToConsole("👾" + message, "debug");
+    this.writeToConsole("👾 " + message, "debug");
   }
 }

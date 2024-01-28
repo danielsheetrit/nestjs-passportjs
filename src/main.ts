@@ -8,7 +8,6 @@ import * as passport from "passport";
 import { CustomLogger } from "./utils/config/logger.service";
 import { HttpFilter } from "./utils/error-filters/http.filter";
 import { DTOValidationFilter } from "./utils/error-filters/dto.filter";
-import { Logger } from "@nestjs/common";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { bufferLogs: true });
