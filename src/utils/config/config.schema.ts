@@ -8,5 +8,9 @@ export const configValidationSchema = Joi.object({
   [configKeys.saltRound]: Joi.number().default(10),
   [configKeys.dbName]: Joi.string().required(),
   [configKeys.sessionSecret]: Joi.string().required(),
-  [configKeys.sessionMaxAge]: Joi.number().required()
+  [configKeys.sessionMaxAge]: Joi.number().required(),
+  [configKeys.awsAccessKey]: Joi.string().required(),
+  [configKeys.awsSecretKey]: Joi.string().required(),
+  [configKeys.currentEnv]: Joi.string().required(),
+  [configKeys.awsRegion]: Joi.string().required(),
 });

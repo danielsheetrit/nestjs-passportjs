@@ -6,4 +6,8 @@ export declare const configKeys: {
     dbName: string;
     sessionSecret: string;
     sessionMaxAge: string;
+    awsAccessKey: string;
+    awsSecretKey: string;
+    currentEnv: string;
+    awsRegion: string;
 };

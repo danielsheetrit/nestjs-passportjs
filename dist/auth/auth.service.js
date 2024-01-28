@@ -13,18 +13,17 @@ exports.AuthService = void 0;
 const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
 const bcrypt = require("bcrypt");
-const ErrorWithMessage_1 = require("../utils/errors/ErrorWithMessage");
-const common_2 = require("@nestjs/common");
 const users_service_1 = require("../users/users.service");
 const config_keys_1 = require("../utils/config/config-keys");
+const bad_request_error_1 = require("../utils/errors/bad-request.error");
 let AuthService = class AuthService {
     constructor(usersService, configService) {
         this.usersService = usersService;
         this.configService = configService;
     }
     async signupNewUser(username, password) {
-        const hashSecret = this.configService.get(config_keys_1.configKeys.saltRound);
-        const hashedPassword = await bcrypt.hash(password, parseInt(hashSecret));
+        const saltRound = this.configService.get(config_keys_1.configKeys.saltRound);
+        const hashedPassword = await bcrypt.hash(password, saltRound);
         const user = await this.usersService.insertUser(username, hashedPassword);
         if (user) {
             const { password, ...rest } = user;
@@ -35,7 +34,7 @@ let AuthService = class AuthService {
         const user = await this.usersService.getUser(username);
         const passwordValid = await bcrypt.compare(password, user.password);
         if (!user || !passwordValid) {
-            throw new common_2.HttpException("Password or Username are Invalid", common_2.HttpStatus.BAD_REQUEST);
+            throw new bad_request_error_1.BadRequestError("Password or Username are Invalid");
         }
         return {
             userId: user.id,
@@ -46,7 +45,6 @@ let AuthService = class AuthService {
 exports.AuthService = AuthService;
 exports.AuthService = AuthService = __decorate([
     (0, common_1.Injectable)(),
-    (0, common_1.UseFilters)(ErrorWithMessage_1.ErrorWithMessage),
     __metadata("design:paramtypes", [users_service_1.UsersService,
         config_1.ConfigService])
 ], AuthService);

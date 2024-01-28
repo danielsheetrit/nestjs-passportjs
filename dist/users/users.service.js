@@ -16,6 +16,7 @@ exports.UsersService = void 0;
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
+const bad_request_error_1 = require("../utils/errors/bad-request.error");
 let UsersService = class UsersService {
     constructor(userModel) {
         this.userModel = userModel;
@@ -33,7 +34,7 @@ let UsersService = class UsersService {
         const username = userName.toLowerCase();
         const user = await this.userModel.findOne({ username });
         if (!user) {
-            throw new common_1.HttpException('User not found', common_1.HttpStatus.BAD_REQUEST);
+            throw new bad_request_error_1.BadRequestError('User not found');
         }
         return user;
     }

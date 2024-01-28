@@ -10,6 +10,10 @@ exports.configValidationSchema = Joi.object({
     [config_keys_1.configKeys.saltRound]: Joi.number().default(10),
     [config_keys_1.configKeys.dbName]: Joi.string().required(),
     [config_keys_1.configKeys.sessionSecret]: Joi.string().required(),
-    [config_keys_1.configKeys.sessionMaxAge]: Joi.number().required()
+    [config_keys_1.configKeys.sessionMaxAge]: Joi.number().required(),
+    [config_keys_1.configKeys.awsAccessKey]: Joi.string().required(),
+    [config_keys_1.configKeys.awsSecretKey]: Joi.string().required(),
+    [config_keys_1.configKeys.currentEnv]: Joi.string().required(),
+    [config_keys_1.configKeys.awsRegion]: Joi.string().required(),
 });
 //# sourceMappingURL=config.schema.js.map

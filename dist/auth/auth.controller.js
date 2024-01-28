@@ -16,7 +16,6 @@ exports.AuthController = void 0;
 const common_1 = require("@nestjs/common");
 const auth_service_1 = require("./auth.service");
 const signup_dto_1 = require("./dto/signup.dto");
-const ErrorWithMessage_1 = require("../utils/errors/ErrorWithMessage");
 const local_guard_1 = require("./guards/local.guard");
 const authenticated_guard_1 = require("./guards/authenticated.guard");
 let AuthController = class AuthController {
@@ -41,7 +40,6 @@ let AuthController = class AuthController {
 exports.AuthController = AuthController;
 __decorate([
     (0, common_1.Post)("/signup"),
-    (0, common_1.HttpCode)(200),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [signup_dto_1.SignupDTO]),
@@ -50,7 +48,7 @@ __decorate([
 __decorate([
     (0, common_1.UseGuards)(local_guard_1.LocalAuthGuard),
     (0, common_1.Post)("/signin"),
-    (0, common_1.HttpCode)(200),
+    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
     __param(0, (0, common_1.Request)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
@@ -73,7 +71,6 @@ __decorate([
 ], AuthController.prototype, "logout", null);
 exports.AuthController = AuthController = __decorate([
     (0, common_1.Controller)("/auth"),
-    (0, common_1.UseFilters)(ErrorWithMessage_1.ErrorWithMessage),
     __metadata("design:paramtypes", [auth_service_1.AuthService])
 ], AuthController);
 //# sourceMappingURL=auth.controller.js.map

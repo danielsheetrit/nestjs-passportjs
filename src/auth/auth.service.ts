@@ -1,14 +1,12 @@
-import { Injectable, UseFilters } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import * as bcrypt from "bcrypt";
-import { ErrorWithMessage } from "src/utils/errors/ErrorWithMessage";
-import { HttpException, HttpStatus } from "@nestjs/common";
 
 import { UsersService } from "src/users/users.service";
 import { configKeys } from "src/utils/config/config-keys";
+import { BadRequestError } from "src/utils/errors/bad-request.error";
 
 @Injectable()
-@UseFilters(ErrorWithMessage)
 export class AuthService {
   constructor(
     private usersService: UsersService,
@@ -16,9 +14,9 @@ export class AuthService {
   ) {}
 
   async signupNewUser(username: string, password: string): Promise<any> {
-    const hashSecret = this.configService.get<string>(configKeys.saltRound);
-    const hashedPassword = await bcrypt.hash(password, parseInt(hashSecret));
-
+    const saltRound = this.configService.get<number>(configKeys.saltRound);
+    
+    const hashedPassword = await bcrypt.hash(password, saltRound);
     const user = await this.usersService.insertUser(username, hashedPassword);
 
     if (user) {
@@ -32,10 +30,7 @@ export class AuthService {
     const passwordValid = await bcrypt.compare(password, user.password);
 
     if (!user || !passwordValid) {
-      throw new HttpException(
-        "Password or Username are Invalid",
-        HttpStatus.BAD_REQUEST,
-      );
+      throw new BadRequestError("Password or Username are Invalid");
     }
 
     return {

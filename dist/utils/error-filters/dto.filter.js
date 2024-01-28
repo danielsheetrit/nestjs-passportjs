@@ -6,25 +6,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ErrorWithMessage = void 0;
+exports.DTOValidationFilter = void 0;
 const common_1 = require("@nestjs/common");
-let ErrorWithMessage = class ErrorWithMessage {
+const dto_validation_exception_1 = require("../exceptions/dto-validation.exception");
+const common_2 = require("@nestjs/common");
+let DTOValidationFilter = class DTOValidationFilter {
     catch(exception, host) {
         const ctx = host.switchToHttp();
         const response = ctx.getResponse();
         const request = ctx.getRequest();
-        const status = exception.getStatus();
-        const message = exception.message;
-        response.status(status).json({
-            statusCode: status,
+        common_2.Logger.error(`dto-validation-error at: ${request.url}`);
+        response.status(common_1.HttpStatus.BAD_REQUEST).json({
+            statusCode: common_1.HttpStatus.BAD_REQUEST,
             timestamp: new Date().toISOString(),
             path: request.url,
-            message,
+            message: "dto-validation-error",
+            errors: exception.errors,
         });
     }
 };
-exports.ErrorWithMessage = ErrorWithMessage;
-exports.ErrorWithMessage = ErrorWithMessage = __decorate([
-    (0, common_1.Catch)(common_1.HttpException)
-], ErrorWithMessage);
-//# sourceMappingURL=ErrorWithMessage.js.map
+exports.DTOValidationFilter = DTOValidationFilter;
+exports.DTOValidationFilter = DTOValidationFilter = __decorate([
+    (0, common_1.Catch)(dto_validation_exception_1.DTOValidationException)
+], DTOValidationFilter);
+//# sourceMappingURL=dto.filter.js.map
